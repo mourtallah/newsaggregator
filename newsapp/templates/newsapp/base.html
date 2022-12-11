@@ -7,9 +7,22 @@
         {% block title %}
         {% endblock %}
     </title>
+    <style>
+        table, th, td {
+          border: 1px solid;
+          table-layout: fixed;
+          width: 100%;
+        }  
+    </style>
 </head>
 <body>
-    {% block content %}
+    <h1>Welcome to DealFlow</h1>
+    {% block content_deal %}
     {% endblock %}
+    {% block content_company %}
+    {% endblock %}
+    {% block content_investor %}
+    {% endblock %}
+    
 </body>
 </html>

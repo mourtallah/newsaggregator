@@ -1,12 +1,63 @@
 {% extends 'newsapp/base.html' %}
 
-{% block title %}For Example{% endblock %}
+{% block title %}DealFlow{% endblock %}
 
-{% block content %}
-<h2>Menu</h2>
+{% block content_news_clip %}
+    <h2>News Clips</h2>
+        <ul>
+        {% for newsclip in newsclips %}
+            <li><a href="{{newsclip.link}}">{{ newsclip.headline }}</a> - {{ newsclip.author }}: {{ newsclip.publisher }}</li>
+        {% endfor %}
+        </ul>
+{% endblock %}
+
+{% block content_deal %}
+    <h2>Deals</h2>
+    <button onclick="add_deal.html">add a new deal!</button>
+    <ul>
+        {% for deal in deals %}
+            <table>
+                <tr>
+                    <td>{{ deal.company }}</td>
+                    <td>{{ deal.investor }}</td>
+                    <td>{{ deal.funding_round }}</td>
+                    <td>{{ deal.year }}</td>
+                    <td>{{ deal.quarter }}</td>
+                </tr>
+            </table>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block content_company %}
+<h2>Companies</h2>
+<button onclick ="add_company.html">add a new company!</button>
 <ul>
-{% for newsclip in newsclips %}
-    <li><a href="{{newsclip.link}}">{{ newsclip.headline }}</a> - {{ newsclip.author }}: {{ newsclip.publisher }}</li>
+{% for company in companies %}
+    <table>
+        <tr>
+            <td>{{ company.name }}</td>
+            <td>{{ company.last_funding_quarter }}</td>
+            <td>{{ company.industry }}</td>
+            <td>{{ company.location }}</td>
+        </tr>
+    </table>
 {% endfor %}
 </ul>
+{% endblock %}
+
+{% block content_investor %}
+<h2>Investors</h2>
+<button onclick="add_investor.html">add a new investor!</button>
+<ul>
+{% for investor in investors %}
+    <table>
+        <tr>
+            <td>{{ investor.name }}</td>
+            <td>{{ investor.last_funding_quarter }}</td>
+            <td>{{ investor.industry }}</td>
+            <td>{{ investor.location }}</td>
+        </tr>
+    </table>
+{% endfor %}
 {% endblock %}
