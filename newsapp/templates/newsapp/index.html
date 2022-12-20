@@ -13,7 +13,7 @@
 
 {% block content_deal %}
     <h2>Deals</h2>
-    <button onclick="add_deal.html">add a new deal!</button>
+    <a href="new_deal"><button onclick="newdeal.html">add a new deal!</button></a>
     <ul>
         {% for deal in deals %}
             <table>
@@ -22,8 +22,10 @@
                 <th>Funding Round</th>
                 <th>Year</th>
                 <tr>
-                    <td>{{ deal.company }}</td>
-                    <td>{{ deal.investor }}</td>
+                    <td>{% for company in deal.company.all %}
+                        {{ company.name }}
+                        {% endfor %} </td>
+                    <td>{{ deal.investor.name }}</td>
                     <td>{{ deal.funding_round }}</td>
                     <td>{{ deal.year }}</td>
                     <td>{{ deal.quarter }}</td>
@@ -35,7 +37,7 @@
 
 {% block content_company %}
 <h2>Companies</h2>
-<button onclick ="add_company.html">add a new company!</button>
+<a href="new_co"><button onclick="new_co.html">add a new company!</button></a>
 <ul>
 {% for company in companies %}
     <table>
@@ -56,7 +58,7 @@
 
 {% block content_investor %}
 <h2>Investors</h2>
-<button onclick="add_investor.html">add a new investor!</button>
+<a href="new_inv"><button onclick="new_inv.html">add a new investor!</button></a>
 <ul>
 {% for investor in investors %}
     <table>

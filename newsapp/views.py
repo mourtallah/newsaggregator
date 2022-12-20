@@ -1,6 +1,15 @@
 from django.shortcuts import render
-from .models import NewsClip, Investor, Deal, Company
-from django.http import HttpResponse
+from .models import (
+    NewsClip,
+    Investor,
+    Deal,
+    Company,
+    DealForm,
+    CompanyForm,
+    InvestorForm,
+)
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 
 def index(request):
@@ -43,6 +52,39 @@ def investor(request):
     investors = Investor.objects.all()
     context = {"investors": investors}
     return render(request, "newsapp/for.html", context)
+
+
+def new_deal(request):
+    if request.method == "POST":
+        form = DealForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("index"))
+    else:
+        form = Deal()
+    return render(request, "newsapp/new_deal.html", {"form": form})
+
+
+def new_co(request):
+    if request.method == "POST":
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("index"))
+    else:
+        form = Company()
+    return render(request, "newsapp/new_co.html", {"form": form})
+
+
+def new_inv(request):
+    if request.method == "POST":
+        form = InvestorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("index"))
+    else:
+        form = Investor()
+    return render(request, "newsapp/new_inv.html", {"form": form})
 
 
 def allauth(request):

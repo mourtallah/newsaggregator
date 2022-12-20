@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 
 
 class Investor(models.Model):
@@ -7,6 +8,12 @@ class Investor(models.Model):
 
     name = models.CharField(max_length=200, unique=True, blank=False, null=False)
     twitter_handle = models.CharField(max_length=50, unique=True, blank=True, null=True)
+
+
+class InvestorForm(ModelForm):
+    class Meta:
+        model = Investor
+        fields = ["name", "twitter_handle"]
 
 
 class Company(models.Model):
@@ -19,6 +26,12 @@ class Company(models.Model):
     )
     industry = models.CharField(max_length=200, default="Probably Tech")
     location = models.CharField(max_length=200, default="Probably San Francisco")
+
+
+class CompanyForm(ModelForm):
+    class Meta:
+        model = Company
+        fields = ["name", "last_funding_quarter", "industry", "location"]
 
 
 class Deal(models.Model):
@@ -53,6 +66,13 @@ class Deal(models.Model):
             ("E", "Series E"),
         ],
     )
+
+
+class DealForm(ModelForm):
+    class Meta:
+        model = Deal
+        fields = ["quarter", "year", "company", "investor", "funding_round"]
+    
 
 
 # class Firm(models.Model):
